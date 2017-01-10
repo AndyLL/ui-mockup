@@ -1,6 +1,13 @@
 var app = angular.module('app', ['ngMaterial']);
 
 app
+	.controller('MainController', function($scope){
+		$scope.device_info = {
+			name: 'Asset Device 001',
+			serialNumber: '87932013SF11',
+			lastHeartbeat: '2016-08-08 06:06:06 EST'
+		}
+	})
 	.controller('listController', function($scope){
 		$scope.reservations = [
 			{
@@ -58,7 +65,4 @@ app
 		  	originatorEv = ev;
 		  	$mdOpenMenu(ev);
 		};
-
-
-
   	});

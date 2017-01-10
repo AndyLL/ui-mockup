@@ -26,7 +26,7 @@ a{
 </style>
 </head>
 
-<body ng-app="app" ng-cloak>
+<body ng-app="app" ng-cloak ng-controller="MainController">
 <md-card>
 	<!-- Card Header -->
 	<md-card-header>
@@ -35,7 +35,7 @@ a{
 		</md-button>
 		
 		<md-card-header-text>
-            <span class="md-headline">Make Reservation On Devide</span> </md-card-title-text>
+            <span class="md-headline">Make Reservation On Devide</span> {{test}}</md-card-title-text>
         </md-card-header-text>
 	</md-card-header>
 	<md-divider></md-divider>
@@ -62,14 +62,14 @@ a{
 					<md-tooltip md-direction="bottom"> Name </md-tooltip>
 					<md-icon> <i class="fa fa-tablet infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
-				<span class="infos">Asset Device 001</span>
+				<span class="infos">{{device_info.name}}</span>
 				<md-button class="md-icon-button" aria-label="Serial Number">
 					<md-tooltip md-direction="bottom"> Serial Number </md-tooltip>
 					<md-icon> <i class="fa fa-list-ol infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
-				<span class="infos">87932013SF11</span>
+				<span class="infos">{{device_info.serialNumber}}</span>
 				<md-button class="md-icon-button" aria-label="Last Heartbeat">
-					<md-tooltip md-direction="bottom"> Last Heartbeat </md-tooltip>
+					<md-tooltip md-direction="bottom"> {{device_info.lastHeartbeat}} </md-tooltip>
 					<md-icon> <i class="fa fa-heartbeat infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
 				<span class="infos">2016-08-08 06:06:06 EST</span> 
