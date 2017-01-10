@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/main.css"/>
 </head>
 
@@ -10,6 +11,9 @@
 <md-card>
 	<md-card-title>
 		<md-card-title-text> 
+			<md-button class="md-fab">
+	            <md-icon><i class="material-icons">link</i></md-icon>
+	        </md-button>
 			<span class="md-headline">Make Reservation On Devide</span>
 			<md-divider></md-divider>
 		</md-card-title-text>
@@ -18,48 +22,49 @@
 	<md-card-content>
 		<form name="userForm">
 			<div layout-gt-xs="row">
-				<md-input-container class="md-icon-float md-block">
-
+				<md-input-container class="md-icon-float md-block" flex-gt-sm>
 			      	<label>Scanner</label>
-					<md-icon><i class="material-icons">perm_device_information</i></md-icon>
+					<md-icon><i class="material-icons">search</i></md-icon>
 			      	<input ng-model="scanner" type="text">
 			    </md-input-container>
 
-				<md-input-container class="md-icon-float md-block">
-			      	<!-- Use floating label instead of placeholder -->
+				<md-input-container class="md-icon-float md-block" flex-gt-sm>
 			      	<label>Asset Device 001</label>
 			      	<md-icon><i class="material-icons">search</i></md-icon>
-			      	<input ng-model="scanner" type="text">
+			      	<input ng-model="device" type="text">
 			    </md-input-container>
 			</div>
 
 			<div layout-gt-sm="row">
 				<md-button class="md-icon-button" aria-label="refresh">
 			        <md-tooltip md-direction="bottom">
-			        Name
+			        	Name
 			        </md-tooltip>
-			        <md-icon md-svg-src="img/icons/ic_refresh_24px.svg" style="width: 24px; height: 24px;">
+			        <md-icon>
+			        	<i class="fa fa-tablet" aria-hidden="true"></i>
 			        </md-icon>
 			    </md-button>
-			    Asset Device 001
+			    <span class="infos">Asset Device 001</span>
 
 				<md-button class="md-icon-button" aria-label="refresh">
 			        <md-tooltip md-direction="bottom">
-			        Serial Number
+			        	Serial Number
 			        </md-tooltip>
-			        <md-icon md-svg-src="img/icons/ic_refresh_24px.svg" style="width: 24px; height: 24px;">
+			        <md-icon>
+			        	<i class="fa fa-list-ol" aria-hidden="true"></i>
 			        </md-icon>
 			    </md-button>
-				87932013SF11
+				<span class="infos">87932013SF11</span>
 
-				<md-button class="md-icon-button" aria-label="refresh">
+				<md-button class="md-icon-button" aria-hidden="true">
 			        <md-tooltip md-direction="bottom">
-			        Last Heartbeat
+			        	Last Heartbeat
 			        </md-tooltip>
-			        <md-icon md-svg-src="img/icons/ic_refresh_24px.svg" style="width: 24px; height: 24px;">
+			        <md-icon>
+			        	<i class="fa fa-heartbeat" aria-hidden="true"></i>
 			        </md-icon>
 			    </md-button>
-				2016-08-08 06:06:06 EST
+				<span class="infos">2016-08-08 06:06:06 EST</span>
 			</div>
 
 			<md-input-container class="md-block">
