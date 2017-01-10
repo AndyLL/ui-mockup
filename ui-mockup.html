@@ -1,0 +1,156 @@
+<html lang="en" >
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+
+<body ng-app="app" ng-cloak>
+<md-card>
+	<md-card-title>
+		<md-card-title-text> 
+			<span class="md-headline">Make Reservation On Devide</span>
+			<md-divider></md-divider>
+		</md-card-title-text>
+	</md-card-title>
+
+	<md-card-content>
+		<form name="userForm">
+			<div layout-gt-xs="row">
+				<md-input-container class="md-icon-float md-block">
+			      	<!-- Use floating label instead of placeholder -->
+			      	<label>Scanner</label>
+			      	<md-icon md-svg-src="img/icons/ic_person_24px.svg" class="Scanner"></md-icon>
+			      	<input ng-model="scanner" type="text">
+			    </md-input-container>
+
+				<md-input-container class="md-icon-float md-block">
+			      	<!-- Use floating label instead of placeholder -->
+			      	<label>Asset Device 001</label>
+			      	<md-icon md-svg-src="img/icons/ic_person_24px.svg" class="Scanner"></md-icon>
+			      	<input ng-model="scanner" type="text">
+			    </md-input-container>
+			</div>
+
+			<div layout-gt-sm="row">
+				Asset Device 001
+				87932013SF11
+				2016-08-08 06:06:06 EST
+			</div>
+
+			<md-input-container class="md-block">
+				<md-content>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="null">
+          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.who }}</h3>
+            <h4>{{ item.what }}</h4>
+            <p>{{ item.notes }}</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">2 line item</md-subheader>
+        <md-list-item class="md-2-line">
+          <img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ todos[0].who }}</h3>
+            <p>Secondary text</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">3 line item, long paragraph (see on mobile)</md-subheader>
+        <md-list-item class="md-3-line md-long-text">
+          <img ng-src="{{todos[0].face}}?25" class="md-avatar" alt="{{todos[0].who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ todos[0].who }}</h3>
+            <p>
+              Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+              Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+              velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            </p>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-3-line md-long-text">
+          <img ng-src="{{todos[1].face}}?25" class="md-avatar" alt="{{todos[1].who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ todos[1].who }}</h3>
+            <p>
+              Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+              Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+              velit. Class aptent taciti sociosqu ad litra torquent per conubia nostra, per inceptos himenaeos.
+            </p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">Classes</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="phone in phones">
+          <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
+          <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}"
+               ng-if="phone.options.face"/>
+          <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+            <h3> {{ phone.number }} </h3>
+            <p> {{ phone.type }} </p>
+          </div>
+          <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
+            <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </div>
+			</md-input-container>
+
+			<md-input-container md-no-float class="md-block">
+				<input ng-model="user.address2" placeholder="Address 2">
+			</md-input-container>
+
+			<div layout-gt-sm="row">
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>City</label>
+					<input ng-model="user.city">
+				</md-input-container>
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>State</label>
+					<md-select ng-model="user.state">
+						<md-option ng-repeat="state in states" value="{{state.abbrev}}"> {{state.abbrev}} </md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>Postal Code</label>
+					<input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+	                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+					<div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+						<div ng-message="required" class="my-message">You must supply a postal code.</div>
+						<div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+							code. </div>
+						<div ng-message="md-maxlength" class="my-message"> Don't use the long version silly...we don't need to be that specific... </div>
+					</div>
+				</md-input-container>
+			</div>
+			<md-input-container class="md-block">
+				<label>Biography</label>
+				<textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+			</md-input-container>
+		</form>
+	</md-card-content>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-button>Cancle</md-button>
+	</md-card-actions>
+</md-card>
+</div>
+
+<!-- Angular Material requires Angular.js Libraries --> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script> 
+
+<!-- Angular Material Library --> 
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script> 
+
+<!-- Your application bootstrap  --> 
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
