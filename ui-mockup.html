@@ -2,127 +2,158 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/main.css"/>
+<style>
+md-menu-content {
+	padding: 10px;
+}
+.md-headline{
+	line-height:70px;
+}
+md-icon .infos{
+	font-size:24px;
+}
+.moreop{
+	display: flex;
+	flex-direction: row-reverse;
+	line-height: 40px;
+	margin-bottom:20px;
+}
+a{
+	text-decoration: none;
+    color: cadetblue;
+}
+</style>
 </head>
 
 <body ng-app="app" ng-cloak>
 <md-card>
-	<md-card-title>
-		<md-card-title-text>
-			<md-button class="md-fab">
-				<md-icon><i class="material-icons">link</i></md-icon>
-			</md-button>
-			<span class="md-headline">Make Reservation On Devide</span>
-			<md-divider></md-divider>
-		</md-card-title-text>
-	</md-card-title>
+	<!-- Card Header -->
+	<md-card-header>
+		<md-button class="md-fab">
+			<md-icon><i class="fa fa-link" aria-hidden="true" style="font-size: 24px;"></i></md-icon>
+		</md-button>
+		
+		<md-card-header-text>
+            <span class="md-headline">Make Reservation On Devide</span> </md-card-title-text>
+        </md-card-header-text>
+	</md-card-header>
+	<md-divider></md-divider>
+	
+	<!-- main content -->
 	<md-card-content>
-		<form name="userForm">
-			<div layout-gt-xs="row">
-				<md-input-container class="md-icon-float md-block" flex-gt-sm>
-					<label>Scanner</label>
-					<md-icon><i class="material-icons">search</i></md-icon>
-					<input ng-model="scanner" type="text">
-				</md-input-container>
-				<md-input-container class="md-icon-float md-block" flex-gt-sm>
-					<label>Asset Device 001</label>
-					<md-icon><i class="material-icons">search</i></md-icon>
-					<input ng-model="device" type="text">
-				</md-input-container>
-			</div>
-			<div layout-gt-sm="row">
-				<md-button class="md-icon-button" aria-label="refresh">
+		<div layout-gt-xs="row">
+			<md-input-container class="md-icon-float md-block" flex-gt-sm>
+				<label>Scanner</label>
+				<md-icon><i class="fa fa-search" aria-hidden="true"></i></md-icon>
+				<input ng-model="scanner" type="text">
+			</md-input-container>
+			<md-input-container class="md-icon-float md-block" flex-gt-sm>
+				<label>Asset Device 001</label>
+				<md-icon><i class="fa fa-search" aria-hidden="true"></i></md-icon>
+				<input ng-model="device" type="text">
+			</md-input-container>
+		</div>
+
+		<div layout="row">
+			<!-- infos -->
+			<div flex>
+				<md-button class="md-icon-button" aria-label="Name">
 					<md-tooltip md-direction="bottom"> Name </md-tooltip>
-					<md-icon> <i class="fa fa-tablet" aria-hidden="true"></i> </md-icon>
+					<md-icon> <i class="fa fa-tablet infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
 				<span class="infos">Asset Device 001</span>
-				<md-button class="md-icon-button" aria-label="refresh">
+				<md-button class="md-icon-button" aria-label="Serial Number">
 					<md-tooltip md-direction="bottom"> Serial Number </md-tooltip>
-					<md-icon> <i class="fa fa-list-ol" aria-hidden="true"></i> </md-icon>
+					<md-icon> <i class="fa fa-list-ol infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
 				<span class="infos">87932013SF11</span>
-				<md-button class="md-icon-button" aria-hidden="true">
+				<md-button class="md-icon-button" aria-label="Last Heartbeat">
 					<md-tooltip md-direction="bottom"> Last Heartbeat </md-tooltip>
-					<md-icon> <i class="fa fa-heartbeat" aria-hidden="true"></i> </md-icon>
+					<md-icon> <i class="fa fa-heartbeat infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
-				<span class="infos">2016-08-08 06:06:06 EST</span> </div>
+				<span class="infos">2016-08-08 06:06:06 EST</span> 
 			</div>
+			
+			<!-- right options -->
+			<div flex="30">
+				<div class="md-menu-demo" ng-controller="filterController as ctrl">
+					<div class="menu-demo-container" layout-align="center center" layout="row">
+						<md-button class="md-icon-button" ><i class="fa fa-refresh md-icon-button" aria-hidden="true"></i></md-button>
+						<md-button class="md-icon-button" ><i class="fa fa-bookmark md-icon-button" aria-hidden="true"></i></md-button>
 
-			<div class="md-menu-demo" ng-controller="BasicDemoCtrl as ctrl" ng-cloak>
-				<div class="menu-demo-container" layout-align="center center" layout="column">
-					<md-menu>
-						<md-button aria-label="menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-							<md-icon md-menu-origin> <i class="material-icons">menu</i></md-icon>
-						</md-button>
-						<md-menu-content width="4">
-							<md-menu-item>
-								<md-checkbox ng-model="data.available" aria-label="Available"> Available </md-checkbox>
-							</md-menu-item>
-							<md-menu-item>
-								<md-checkbox ng-model="data.reserved" aria-label="Reserved"> Reserved </md-checkbox>
-							</md-menu-item>
-						</md-menu-content>
-					</md-menu>
+						<md-menu>
+							<md-button aria-label="menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+								<i class="fa fa-ellipsis-v md-icon-button" aria-hidden="true"></i>
+							</md-button>
+							<md-menu-content width="3">
+								<md-menu-item>
+									<md-checkbox aria-label="Available" ng-model="ctrl.available" ng-init="ctrl.available = true"> Available </md-checkbox>
+								</md-menu-item>
+								<md-menu-item>
+									<md-checkbox aria-label="Reserved" ng-model="ctrl.reserved" ng-init="ctrl.reserved = true"> Reserved </md-checkbox>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
 				</div>
 			</div>
+		</div>
+		
+		<!-- list start -->
+		<md-list flex ng-controller="listController">
+			<div layout="row" layout-align="space-around center">
+				<md-subheader flex="10" class="md-no-sticky" ng-click="listOrder = 'position'">Position</md-subheader>
+				<md-subheader flex="15" class="md-no-sticky" ng-click="listOrder = 'assetID'">Asset ID</md-subheader>
+				<md-subheader flex="20" class="md-no-sticky" ng-click="listOrder = 'lockerSize'">Locker Size</md-subheader>
+				<md-subheader flex="20" class="md-no-sticky" ng-click="listOrder = 'recharger'">Recharger</md-subheader>
+				<md-subheader flex="10" class="md-no-sticky" ng-click="listOrder = 'tag'">Tag</md-subheader>
+				<md-subheader flex="15" class="md-no-sticky" ng-click="listOrder = 'status'">Status</md-subheader>
+				<md-subheader flex="10" class="md-no-sticky" ng-click="listOrder = 'link'">Link</md-subheader>
+			</div>
+			<md-divider ></md-divider>
 
-			<md-input-container class="md-block">
-				<md-content>
-					<md-list flex>
-						<div layout="row" layout-align="space-around center">
-							<md-subheader class="md-no-sticky">Position</md-subheader>
-							<md-subheader class="md-no-sticky">Asset ID</md-subheader>
-							<md-subheader class="md-no-sticky">Locker Size</md-subheader>
-							<md-subheader class="md-no-sticky">Recharger</md-subheader>
-							<md-subheader class="md-no-sticky">Tag</md-subheader>
-							<md-subheader class="md-no-sticky">Status</md-subheader>
-							<md-subheader class="md-no-sticky"></md-subheader>
-						</div>
-						<md-list-item class="md-3-line" ng-repeat="item in reservations" ng-click="null">
-							<div layout="row" layout-align="space-around center">
-								<div>{{ item.position }}</div>
-								<div>{{ item.assetID }}</div>
-								<div>{{ item.lockerSize }}</div>
-								<div>{{ item.recharger }}</div>
-								<div>{{ item.tag }}</div>
-								<div>{{ item.status }}</div>
-								<md-button href="http://google.com"
-				         title="Launch Google.com in new window"
-				         target="_blank"
-				         ng-disabled="true"
-				         aria-label="Google.com"
-				         class="md-icon-button launch" >
-									<md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
-								</md-button>
-							</div>
-							<md-divider ></md-divider>
-						</md-list-item>
-					</md-list>
-				</md-content>
-			</md-input-container>
+			<div ng-repeat="item in reservations | orderBy: listOrder">
+				<md-list-item>
+					<div flex="10">{{item.position}}</div>
+					<div flex="15"><a href="/{{item.assetID}}">{{item.assetID}}</a></div>
+					<div flex="20">{{item.lockerSize}}</div>
+					<div flex="20">{{item.recharger}}</div>
+					<div flex="10"><i class="fa fa-wheelchair" aria-hidden="true" ng-if="item.tag"></i></div>
+					<div flex="15">{{item.status}}</div>
+					<div flex="10"><a href="{{item.link}}"><i class="fa fa-link" aria-hidden="true"></i></a></div>
+				</md-list-item>
+				<md-divider ></md-divider>
+			</div>
+		</md-list>
 
-			
+		<div class="row moreop">
+			<div flex="10">
+				<a href=""><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+				<a href=""><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+			</div>
 
-			
-
-		</form>
+			<div flex="10"> 1-5 of 20 <a href=""><i class="fa fa-sort-desc" aria-hidden="true"></i></a></div>
+			<div flex="20"> Rows per page: 5 <a href=""><i class="fa fa-sort-desc" aria-hidden="true"></i></a></div>
+			<div flex="10"> Page: 1 <a href=""><i class="fa fa-sort-desc" aria-hidden="true"></i></a></div>
+		</div>
 	</md-card-content>
+	
+	<!-- Card Action -->
+	<md-divider></md-divider>
 	<md-card-actions layout="row" layout-align="end center">
 		<md-button>Cancle</md-button>
 	</md-card-actions>
 </md-card>
-</div>
 
 <!-- Angular Material requires Angular.js Libraries --> 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
 <!-- Angular Material Library --> 
-<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 <!-- Your application bootstrap  --> 
 <script type="text/javascript" src="js/ui-mockup.js"></script>

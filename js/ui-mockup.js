@@ -1,49 +1,64 @@
 var app = angular.module('app', ['ngMaterial']);
 
-app.controller('DemoCtrl', function(){
-
-})
-
-app.config(['$mdIconProvider', function($mdIconProvider) {
-    $mdIconProvider
-      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-      .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-  }]);
-
 app
-  .config(function($mdIconProvider) {
-    $mdIconProvider
-      .iconSet("call", 'img/icons/sets/communication-icons.svg', 24)
-      .iconSet("social", 'img/icons/sets/social-icons.svg', 24);
-  })
-  .controller('BasicDemoCtrl', function DemoCtrl($mdDialog) {
-    var originatorEv;
+	.controller('listController', function($scope){
+		$scope.reservations = [
+			{
+				position: 10,
+				assetID: '',
+				lockerSize: '11 * 12',
+				recharger: 'Scanner charger',
+				tag: 'true',
+				status: 'Available',
+				link: ''
+			},
+			{
+				position: 11,
+				assetID: '',
+				lockerSize: '11 * 12',
+				recharger: 'Scanner charger',
+				tag: 'true',
+				status: 'Available',
+				link: ''
+			},
+			{
+				position: 12,
+				assetID: '',
+				lockerSize: '11 * 12',
+				recharger: '',
+				tag: '',
+				status: 'Available',
+				link: ''
+			},
+			{
+				position: 20,
+				assetID: '9999',
+				lockerSize: '11 * 12',
+				recharger: '',
+				tag: '',
+				status: 'Reserved',
+				link: ''
+			},
+			{
+				position: 21,
+				assetID: '6688',
+				lockerSize: '11 * 12',
+				recharger: '',
+				tag: '',
+				status: 'Reserved',
+				link: ''
+			}
+		]
+	})
+	.controller('filterController', function DemoCtrl($mdDialog) {
+		this.reserverd = true;
+		this.available = true;
 
-    this.openMenu = function($mdOpenMenu, ev) {
-      originatorEv = ev;
-      $mdOpenMenu(ev);
-    };
+		this.openMenu = function($mdOpenMenu, ev) {
+		  	originatorEv = ev;
+		  	$mdOpenMenu(ev);
+		};
 
-    this.notificationsEnabled = true;
-    this.toggleNotifications = function() {
-      this.notificationsEnabled = !this.notificationsEnabled;
-    };
 
-    this.redial = function() {
-      $mdDialog.show(
-        $mdDialog.alert()
-          .targetEvent(originatorEv)
-          .clickOutsideToClose(true)
-          .parent('body')
-          .title('Suddenly, a redial')
-          .textContent('You just called a friend; who told you the most amazing story. Have a cookie!')
-          .ok('That was easy')
-      );
 
-      originatorEv = null;
-    };
-
-    this.checkVoicemail = function() {
-      // This never happens.
-    };
-  });
+  	});
