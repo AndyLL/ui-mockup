@@ -23,6 +23,16 @@
 		text-decoration: none;
 	    color: cadetblue;
 	}
+	/*set the title columns padding to align with the items*/
+	.titleColumn{
+		padding: 0 16px;
+	}
+	.titleColumn > div{
+		text-align: center;
+	}
+	.itemColumn > div{
+		text-align: center;
+	}
 	</style>
 </head>
 
@@ -102,7 +112,7 @@
 		
 		<!-- list start -->
 		<md-list flex ng-controller="listController">
-			<div layout="row" layout-align="space-around center">
+			<div class="titleColumn" layout="row">
 				<md-subheader flex="10" class="md-no-sticky" ng-click="listOrder = 'position'">Position</md-subheader>
 				<md-subheader flex="15" class="md-no-sticky" ng-click="listOrder = 'assetID'">Asset ID</md-subheader>
 				<md-subheader flex="20" class="md-no-sticky" ng-click="listOrder = 'lockerSize'">Locker Size</md-subheader>
@@ -114,7 +124,7 @@
 			<md-divider ></md-divider>
 
 			<div ng-repeat="item in reservations | orderBy: listOrder">
-				<md-list-item>
+				<md-list-item class="itemColumn" layout="row">
 					<div flex="10">{{item.position}}</div>
 					<div flex="15"><a href="/{{item.assetID}}">{{item.assetID}}</a></div>
 					<div flex="20">{{item.lockerSize}}</div>
