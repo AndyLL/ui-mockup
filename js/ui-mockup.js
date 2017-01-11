@@ -1,15 +1,17 @@
-var app = angular.module('app', ['ngMaterial']);
+var app = angular.module('app', ['ngMaterial'])
 
-app
-	.controller('MainController', function($scope){
+app.controller('MainController', function($scope){
 		$scope.device_info = {
-			name: 'Asset Device 001',
+			name: '001',
 			serialNumber: '87932013SF11',
 			lastHeartbeat: '2016-08-08 06:06:06 EST'
 		}
 	})
-	.controller('listController', function($scope){
-		$scope.reservations = [
+	.controller('ListController', function($mdDialog){
+		var _self = this
+		
+		_filter = {}
+		_self.items = [
 			{
 				position: 10,
 				assetID: '',
@@ -56,13 +58,44 @@ app
 				link: ''
 			}
 		]
-	})
-	.controller('filterController', function DemoCtrl($mdDialog) {
-		this.reserverd = true;
-		this.available = true;
 
-		this.openMenu = function($mdOpenMenu, ev) {
+	  	// get all possible filter options 
+	  	_self.getStatus = function(){
+	  		return (_self.items || [])
+				.map(function (items) { 
+			  		return items.status 
+			  	})
+			  	.filter(function (status, idx, arr) { 
+			  		return arr.indexOf(status) === idx 
+			  	})
+	  	}
+
+		_self.filterByStatus = function(items){
+			try {
+				return _self.filter[items.status] || noFilter(_self.filter)
+			}
+			catch(e){
+				console.log(e)
+			} 
+	  	}
+	  	
+	  	// if no filter option is chosen
+	  	function noFilter(filterObj) {
+			return Object
+				.keys(filterObj)
+				.every(function (key) { 
+		  			return !filterObj[key]
+		  		})
+	  	}
+
+	  	// toggle dropdown menu
+	  	_self.openMenu = function($mdOpenMenu, ev) {
 		  	originatorEv = ev;
 		  	$mdOpenMenu(ev);
 		};
-  	});
+	})
+
+
+
+
+

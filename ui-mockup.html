@@ -1,12 +1,10 @@
+<!doctype html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<style>
-	md-menu-content {
-		padding: 10px;
-	}
 	.md-headline{
 		line-height:70px;
 	}
@@ -23,25 +21,28 @@
 		text-decoration: none;
 	    color: cadetblue;
 	}
+	md-menu-item{
+		margin-left: 15px;
+	}
 	</style>
 </head>
 
-<body ng-app="app" ng-cloak ng-controller="MainController">
+<body ng-app="app" ng-cloak >
 <md-card>
 	<!-- Card Header -->
 	<md-card-header>
-		<md-button class="md-fab">
-			<md-icon><i class="fa fa-link" aria-hidden="true" style="font-size: 24px;"></i></md-icon>
-		</md-button>
-		
+		<md-button class="md-fab" ng-disabled="true" aria-label="Comment" style="background-color: darkturquoise;">
+            <i class="fa fa-link" aria-hidden="true" style="font-size: 24px; vertical-align: inherit;"></i>
+        </md-button>
+
 		<md-card-header-text>
-            <span class="md-headline">Make Reservation On Devide</span> {{test}}</md-card-title-text>
+            <span class="md-headline">Make Reservation On Devide</span></md-card-title-text>
         </md-card-header-text>
 	</md-card-header>
 	<md-divider></md-divider>
 	
 	<!-- main content -->
-	<md-card-content>
+	<md-card-content ng-controller="ListController as itemList">
 		<div layout-gt-xs="row">
 			<md-input-container class="md-icon-float md-block" flex-gt-sm>
 				<label>Scanner</label>
@@ -57,51 +58,55 @@
 
 		<div layout="row">
 			<!-- infos -->
-			<div flex>
+			<div flex ng-controller="MainController">
 				<md-button class="md-icon-button" aria-label="Name">
 					<md-tooltip md-direction="bottom"> Name </md-tooltip>
 					<md-icon> <i class="fa fa-tablet infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
-				<span class="infos">{{device_info.name}}</span>
+				<span class="infos">Asset Device {{device_info.name}}</span>
 				<md-button class="md-icon-button" aria-label="Serial Number">
 					<md-tooltip md-direction="bottom"> Serial Number </md-tooltip>
 					<md-icon> <i class="fa fa-list-ol infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
 				<span class="infos">{{device_info.serialNumber}}</span>
 				<md-button class="md-icon-button" aria-label="Last Heartbeat">
-					<md-tooltip md-direction="bottom"> {{device_info.lastHeartbeat}} </md-tooltip>
+					<md-tooltip md-direction="bottom"> Last Heartbeat </md-tooltip>
 					<md-icon> <i class="fa fa-heartbeat infos" aria-hidden="true"></i> </md-icon>
 				</md-button>
-				<span class="infos">2016-08-08 06:06:06 EST</span> 
+				<span class="infos">{{device_info.lastHeartbeat}}</span> 
 			</div>
 			
 			<!-- right options -->
 			<div flex="30">
-				<div class="md-menu-demo" ng-controller="filterController as ctrl">
-					<div class="menu-demo-container" layout-align="center center" layout="row">
-						<md-button class="md-icon-button" ><i class="fa fa-refresh md-icon-button" aria-hidden="true"></i></md-button>
-						<md-button class="md-icon-button" ><i class="fa fa-bookmark md-icon-button" aria-hidden="true"></i></md-button>
+				<div layout-align="center center" layout="row">
+					<md-button class="md-icon-button" aria-label="Refresh"><i class="fa fa-refresh md-icon-button" aria-hidden="true"></i></md-button>
+					<md-button class="md-icon-button" aria-label="Bookmark"><i class="fa fa-bookmark md-icon-button" aria-hidden="true"></i></md-button>
 
-						<md-menu>
-							<md-button aria-label="menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-								<i class="fa fa-ellipsis-v md-icon-button" aria-hidden="true"></i>
-							</md-button>
-							<md-menu-content width="3">
-								<md-menu-item>
-									<md-checkbox aria-label="Available" ng-model="ctrl.available" ng-init="ctrl.available = true"> Available </md-checkbox>
-								</md-menu-item>
-								<md-menu-item>
-									<md-checkbox aria-label="Reserved" ng-model="ctrl.reserved" ng-init="ctrl.reserved = true"> Reserved </md-checkbox>
-								</md-menu-item>
-							</md-menu-content>
-						</md-menu>
-					</div>
+					<!-- Filter -->
+					<md-menu>
+						<md-button 
+							md-menu-origin 
+							aria-label="Filter" 
+							class="md-icon-button" 
+							ng-click="itemList.openMenu($mdOpenMenu, $event)">
+							<i class="fa fa-ellipsis-v md-icon-button" aria-hidden="true"></i>
+						</md-button>
+
+						<!-- Filter(dropdown) options-->
+						<md-menu-content width="3">
+							<md-menu-item ng-repeat="status in itemList.getStatus()" >
+								<md-checkbox md-menu-align-target ng-model="itemList.filter[status]" ng-init="itemList.filter[status]=true">
+									{{ status }} 
+								</md-checkbox>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
 				</div>
 			</div>
 		</div>
 		
 		<!-- list start -->
-		<md-list flex ng-controller="listController">
+		<md-list flex >	
 			<div layout="row" layout-align="space-around center">
 				<md-subheader flex="10" class="md-no-sticky" ng-click="listOrder = 'position'">Position</md-subheader>
 				<md-subheader flex="15" class="md-no-sticky" ng-click="listOrder = 'assetID'">Asset ID</md-subheader>
@@ -113,7 +118,7 @@
 			</div>
 			<md-divider ></md-divider>
 
-			<div ng-repeat="item in reservations | orderBy: listOrder">
+			<div ng-repeat="item in (itemList.items | filter:itemList.filterByStatus | orderBy: listOrder )">
 				<md-list-item>
 					<div flex="10">{{item.position}}</div>
 					<div flex="15"><a href="/{{item.assetID}}">{{item.assetID}}</a></div>
